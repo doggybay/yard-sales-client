@@ -1,10 +1,13 @@
 import React from 'react';
 import './App.css';
 
+import TopNav from './components/layout/TopNav'
+
 function App() {
   return (
     <div className="App">
-      <h1>Hi....</h1>
+      <TopNav />
+      
     </div>
   );
 }
