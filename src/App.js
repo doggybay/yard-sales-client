@@ -4,6 +4,7 @@ import { Paper, Typography, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import TopNav from './components/layout/TopNav'
+import Sale from './components/sales/Sale'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,16 +23,15 @@ const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(3, 2),
     marginTop: 10
-
   }
 }));
 
 function App() {
-  const classes = useStyles();
+  const classes = useStyles()
   return (
     <div className="App">
       <TopNav />
-      
+
       <Grid container spacing={2}>
         <Grid item sm={3}>
           <Paper className={classes.paper}>
@@ -45,15 +45,7 @@ function App() {
           </Paper>
         </Grid>
         <Grid item sm>
-          <Paper className={classes.paper}>
-            <Typography variant="h5" component="h3">
-              This is a sheet of paper.
-            </Typography>
-            <Typography component="p">
-              Paper can be used to build surface or other elements for your
-              application.
-            </Typography>
-          </Paper>
+          <Sale />
         </Grid>
         <Grid item sm={3}>
           <Paper className={classes.paper}>
