@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme => ({
 
 const Sale = (props) => {
   const classes = useStyles()
+  const pictures = [{ id: 1, pic: 'https://loremflickr.com/320/240/furniture,houses,toys' }, { id: 2, pic: 'https://loremflickr.com/320/240/furniture,houses,toys' }, { id: 3, pic: 'https://loremflickr.com/320/240/furniture,houses,toys' }, { id: 4, pic: 'https://loremflickr.com/320/240/furniture,houses,toys' }, { id: 5, pic: 'https://loremflickr.com/320/240/furniture,houses,toys' }, { id: 6, pic: 'https://loremflickr.com/320/240/furniture,houses,toys' }]
 
   // const { title, details, user_id, location, date_time } = props.sale
 
@@ -26,7 +27,7 @@ const Sale = (props) => {
       <Grid container spacing={3}>
         <Grid item sm={12}>
           <Paper className={classes.paper}>
-            <Typography variant="h1" component="h2">
+            <Typography variant="h1">
               {/*Title */}
               Yard Sale
             </Typography>
