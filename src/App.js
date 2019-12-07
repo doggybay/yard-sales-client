@@ -6,6 +6,12 @@ import { makeStyles } from '@material-ui/core/styles'
 import TopNav from './components/layout/TopNav'
 import Sale from './components/sales/Sale'
 
+//TODO
+// Check ip or a way to find out where im at
+// const ip = require('ip')
+// let ipAddress = ip.not('127.0.0.1')
+
+
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2)
