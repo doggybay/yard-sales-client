@@ -12,14 +12,14 @@ export default (state = initialState, action) => {
     case constants.FETCH_ALL_SALES_PENDING:
     case constants.FETCH_ONE_SALE_PENDING:
     case constants.ADD_NEW_SALE_PENDING:
-    case constants.EDIT_ONE_SALE_PENDING:
+    case constants.EDIT_SALE_PENDING:
     case constants.REMOVE_SALE_PENDING:
       return state
     
     case constants.FETCH_ALL_SALES_FAILED:
     case constants.FETCH_ONE_SALE_FAILED:
     case constants.ADD_NEW_SALE_FAILED:
-    case constants.EDIT_ONE_SALE_FAILED:
+    case constants.EDIT_SALE_FAILED:
     case constants.REMOVE_SALE_FAILED:
       return { ...state, err: action.payload }
     
