@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import './App.css'
 import { Paper, Typography, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import TopNav from './components/layout/TopNav'
 import Sale from './components/sales/Sale'
+import SalesList from './components/sales/SalesList'
+
+//Action creators
+import { fetchAllSales } from './store/sales/actionCreators'
 
 //TODO
 // Check ip or a way to find out where im at
@@ -34,6 +39,12 @@ const useStyles = makeStyles(theme => ({
 
 function App() {
   const classes = useStyles()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchAllSales())
+  })
+
   return (
     <div className="App">
       <TopNav />
@@ -51,7 +62,7 @@ function App() {
           </Paper>
         </Grid>
         <Grid item sm>
-          <Sale />
+          <SalesList />
         </Grid>
         <Grid item sm={3}>
           <Paper className={classes.paper}>
