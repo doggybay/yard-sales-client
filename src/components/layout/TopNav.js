@@ -1,7 +1,7 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
-
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+import { NavLink } from 'react-router-dom'
 
 
 const useStyles = makeStyles(theme => ({
@@ -26,6 +26,7 @@ const TopNav = () => {
           Yard Sales
         </Typography>
         <Button color="inherit">Login</Button>
+        <NavLink to="/"><Button color="inherit">Home</Button></NavLink>
       </Toolbar>
     </AppBar>
   );
