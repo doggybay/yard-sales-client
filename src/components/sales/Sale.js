@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, useParams } from 'react-router-dom'
 import { Paper, Typography, Grid, Button, MobileStepper } from '@material-ui/core'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import CardMedia from '@material-ui/core/CardMedia'
+
+import { fetchOneSale } from '../../store/sales/actionCreators'
 
 //component styles
 const useStyles = makeStyles(theme => ({
@@ -38,21 +42,36 @@ const useStyles = makeStyles(theme => ({
 }));
 
 //example data needs to be removed once fetch calls are made
-const pictures = [
-  { id: 1, pic: "https://loremflickr.com/320/240/furniture" },
-  { id: 2, pic: "https://loremflickr.com/320/240/houses" },
-  { id: 3, pic: "https://loremflickr.com/320/240/toys" },
-  { id: 4, pic: "https://loremflickr.com/320/240/door" },
-  { id: 5, pic: "https://loremflickr.com/320/240/yards" },
-  { id: 6, pic: "https://loremflickr.com/320/240/tools" }
-];
+// const pictures = [
+//   { id: 1, pic: "https://loremflickr.com/320/240/furniture" },
+//   { id: 2, pic: "https://loremflickr.com/320/240/houses" },
+//   { id: 3, pic: "https://loremflickr.com/320/240/toys" },
+//   { id: 4, pic: "https://loremflickr.com/320/240/door" },
+//   { id: 5, pic: "https://loremflickr.com/320/240/yards" },
+//   { id: 6, pic: "https://loremflickr.com/320/240/tools" }
+// ];
+
+
 
 const Sale = (props) => {
+  const idStr = useParams()
+  const id = Number(idStr.id)
+  
   const classes = useStyles()
   const theme = useTheme()
+  
+  const sale = useSelector(state => state.sales.one)
+  
+  const pictures = sale.pictures ? sale.pictures : "pending"
+  
+  console.log('pictures: ', pictures)
 
+
+  //Picture area
+  //state
   const [activeStep, setActiveStep] = useState(0)
-  const maxSteps = pictures.length
+
+  const maxSteps = pictures !== "pending" ? pictures.length : 0
 
   const handleNext = () => {
     setActiveStep(prevActiveStep => prevActiveStep + 1)
@@ -79,7 +98,7 @@ const Sale = (props) => {
 
             {/*Picture area*/}
 
-            <CardMedia className={classes.media} image={pictures[activeStep].pic} title={pictures[activeStep].id} />
+            <CardMedia className={classes.media} image={pictures !== "pending" ? pictures[activeStep].pic : "https://loremflickr.com/320/240/bridges"} title={pictures[activeStep].id} />
             
             <MobileStepper steps={maxSteps} position="static" variant="text" activeStep={activeStep}
               nextButton={
