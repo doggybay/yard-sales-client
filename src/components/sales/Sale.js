@@ -41,17 +41,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-//example data needs to be removed once fetch calls are made
-// const pictures = [
-//   { id: 1, pic: "https://loremflickr.com/320/240/furniture" },
-//   { id: 2, pic: "https://loremflickr.com/320/240/houses" },
-//   { id: 3, pic: "https://loremflickr.com/320/240/toys" },
-//   { id: 4, pic: "https://loremflickr.com/320/240/door" },
-//   { id: 5, pic: "https://loremflickr.com/320/240/yards" },
-//   { id: 6, pic: "https://loremflickr.com/320/240/tools" }
-// ];
-
-
 
 const Sale = (props) => {
   const idStr = useParams()
@@ -63,9 +52,6 @@ const Sale = (props) => {
   const sale = useSelector(state => state.sales.one) || props.sale
   
   const pictures = sale.pictures ? sale.pictures : "pending"
-  
-  console.log('pictures: ', pictures)
-
 
   //Picture area
   //state

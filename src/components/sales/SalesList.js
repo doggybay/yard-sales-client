@@ -1,8 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, Paper, Grid } from '@material-ui/core'
+import { Paper, Grid } from '@material-ui/core'
 
 import { fetchOneSale } from '../../store/sales/actionCreators'
 
@@ -51,4 +50,3 @@ const SalesList = () => {
 }
 
 export default SalesList
-
