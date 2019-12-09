@@ -60,7 +60,7 @@ const Sale = (props) => {
   const classes = useStyles()
   const theme = useTheme()
   
-  const sale = useSelector(state => state.sales.one)
+  const sale = useSelector(state => state.sales.one) || props.sale
   
   const pictures = sale.pictures ? sale.pictures : "pending"
   
@@ -93,7 +93,7 @@ const Sale = (props) => {
             {/*Header */}
             <Typography variant="h1">
               {/*Title */}
-              Yard Sale
+              {sale.title}
             </Typography>
 
             {/*Picture area*/}
@@ -118,10 +118,20 @@ const Sale = (props) => {
           </Paper>
         </Grid>
         <Grid item sm={6}>
-          <Paper className={classes.paper}>xs=6</Paper>
+          {/*Details*/}
+          <Paper className={classes.paper}>
+            <Typography variant="body1">
+              {sale.details}
+            </Typography>
+          </Paper>
         </Grid>
         <Grid item sm={6}>
-          <Paper className={classes.paper}>xs=6</Paper>
+          {/*Location*/}
+          <Paper className={classes.paper}>
+            <Typography variant="body1">
+              {sale.location}
+            </Typography>
+          </Paper>
         </Grid>
         <Grid item sm={3}>
           <Paper className={classes.paper}>xs=3</Paper>

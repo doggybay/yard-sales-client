@@ -6,10 +6,12 @@ import { Card, CardActionArea, CardActions, CardContent, CardMedia, Button, Typo
 
 import { fetchOneSale } from '../../store/sales/actionCreators'
 
+import SaleCard from './SaleCard'
+
 const useStyles = makeStyles(theme => ({
   card: {
     width: 350,
-    marginTop: 1
+    marginTop: 15
   },
   media: {
     height: 140
@@ -34,42 +36,14 @@ const SalesList = () => {
     const picture = sale.pictures[0].pic
 
     return (
-      <Card key={sale.id} className={classes.card}>
-        <CardActionArea>
-          <CardMedia className={classes.media} image={picture} title={sale.title} />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {sale.title}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {sale.date_time}
-          </Typography>
-        </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Share
-          </Button>
-          <Link to={`/sale/${sale.id}`}>
-            <Button id={sale.id} size="small" color="primary" onClick={() => getOneSale(sale.id)}>
-              Learn More
-            </Button>
-          </Link>
-        </CardActions>
-      </Card>
+      <SaleCard sale={sale} picture={picture} getOneSale={getOneSale} classes={classes} />
     )
   })
 
   
   return (
     <Paper className={classes.paper}>
-      <Grid
-        container
-        direction="column"
-        alignItems="center"
-        justify="flex-start"
-      >
-        
+      <Grid container direction="column" alignItems="center" justify="flex-start">
         {listOfCards}
       </Grid>
     </Paper>
