@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import './App.css'
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Paper, Typography, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -46,37 +46,42 @@ function App() {
   })
 
   return (
-    <div className="App">
-      <TopNav />
+    <Router>
+      <div className="App">
+        <TopNav />
 
-      <Grid container spacing={2}>
-        <Grid item sm={3}>
-          <Paper className={classes.paper}>
-            <Typography variant="h5" component="h3">
-              This is a sheet of paper.
+        <Grid container spacing={2}>
+          <Grid item sm={3}>
+            <Paper className={classes.paper}>
+              <Typography variant="h5" component="h3">
+                This is a sheet of paper.
             </Typography>
-            <Typography component="p">
-              Paper can be used to build surface or other elements for your
-              application.
+              <Typography component="p">
+                Paper can be used to build surface or other elements for your
+                application.
             </Typography>
-          </Paper>
+            </Paper>
+          </Grid>
+          <Grid item sm>
+            <Switch>
+              <Route exact path='/' component={SalesList} />
+              <Route path='/sale/:id' component={Sale} />
+            </Switch>
+          </Grid>
+          <Grid item sm={3}>
+            <Paper className={classes.paper}>
+              <Typography variant="h5" component="h3">
+                This is a sheet of paper.
+            </Typography>
+              <Typography component="p">
+                Paper can be used to build surface or other elements for your
+                application.
+            </Typography>
+            </Paper>
+          </Grid>
         </Grid>
-        <Grid item sm>
-          <SalesList />
-        </Grid>
-        <Grid item sm={3}>
-          <Paper className={classes.paper}>
-            <Typography variant="h5" component="h3">
-              This is a sheet of paper.
-            </Typography>
-            <Typography component="p">
-              Paper can be used to build surface or other elements for your
-              application.
-            </Typography>
-          </Paper>
-        </Grid>
-      </Grid>
-    </div>
+      </div>
+    </Router>
   );
 }
 
