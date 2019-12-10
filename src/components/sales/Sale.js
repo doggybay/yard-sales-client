@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(3, 2),
     marginTop: 10,
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
     textAlign: "center"
   },
   media: {
@@ -22,7 +22,6 @@ const useStyles = makeStyles(theme => ({
     marginTop: 10
   },
   root: {
-    maxWidth: 400,
     flexGrow: 1
   },
   header: {
@@ -38,6 +37,24 @@ const useStyles = makeStyles(theme => ({
     overflow: "hidden",
     display: "block",
     width: "100%"
+  },
+  paper1: {
+    padding: theme.spacing(3, 2),
+    marginTop: 10,
+    color: theme.palette.text.primary,
+    textAlign: "center",
+    backgroundColor: theme.palette.secondary.main
+  },
+  paper2: {
+    padding: theme.spacing(3, 2),
+    marginTop: 10,
+    color: theme.palette.text.primary,
+    textAlign: "center",
+    backgroundColor: theme.palette.secondary.light
+  },
+  stepper: {
+    backgroundColor: theme.palette.primary.dark,
+    color: theme.palette.secondary.contrastText
   }
 }));
 
@@ -71,10 +88,10 @@ const Sale = (props) => {
   // const { title, details, user_id, location, date_time } = props.sale
 
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper1}>
       <Grid container spacing={3}>
         <Grid item sm={12}>
-          <Paper className={classes.paper}>
+          <Paper className={classes.paper2}>
             
             {/*Header */}
             <Typography variant="h1">
@@ -86,15 +103,15 @@ const Sale = (props) => {
 
             <CardMedia className={classes.media} image={pictures !== "pending" ? pictures[activeStep].pic : "https://loremflickr.com/320/240/bridges"} title={pictures[activeStep].id} />
             
-            <MobileStepper steps={maxSteps} position="static" variant="text" activeStep={activeStep}
+            <MobileStepper className={classes.stepper} steps={maxSteps} position="static" variant="text" activeStep={activeStep}
               nextButton={
-                <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
+                <Button color="inherit" size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
                   Next
                   {theme.direction === "rtl" ? (<KeyboardArrowLeft />) : (<KeyboardArrowRight />)}
                 </Button>
               }
               backButton={
-                <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+                <Button color="inherit" size="small" onClick={handleBack} disabled={activeStep === 0}>
                   {theme.direction === "rtl" ? (<KeyboardArrowRight />) : (<KeyboardArrowLeft />)}
                   Back
                 </Button>
