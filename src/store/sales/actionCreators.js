@@ -1,17 +1,17 @@
 import axios from 'axios'
 
 import * as actions from './actions'
-import * as BASE_URL from '../locations'
-
+import BASE_URL from '../location'
 
 
 export const fetchAllSales = () => {
+  
 
   return async (dispatch) => {
     try {
       dispatch(actions.fetchAllSalesPending())
 
-      const res = await axios.get(`${BASE_URL.local}/sales`)
+      const res = await axios.get(`${BASE_URL}/sales`)
 
       dispatch(actions.fetchAllSaleSuccess(res.data))
 
@@ -27,7 +27,7 @@ export const fetchOneSale = (id) => {
     try {
       dispatch(actions.fetchOneSalePending())
 
-      const res = await axios.get(`${BASE_URL.local}/sales/${id}`)
+      const res = await axios.get(`${BASE_URL}/sales/${id}`)
 
       dispatch(actions.fetchOneSaleSuccess(res.data))
 
@@ -43,7 +43,7 @@ export const editSale = (id) => {
     try {
       dispatch(actions.editSalePending())
 
-      const res = await axios.patch(`${BASE_URL.local}/sales/${id}`)
+      const res = await axios.patch(`${BASE_URL}/sales/${id}`)
 
       dispatch(actions.editSaleSuccess(res.data))
 
@@ -58,7 +58,7 @@ export const addNewSale = () => {
     try {
       dispatch(actions.addNewSalePending())
 
-      const res = await axios.post(`${BASE_URL.local}/sales`)
+      const res = await axios.post(`${BASE_URL}/sales`)
 
       dispatch(actions.addNewSaleSuccess(res.data))
 
@@ -73,7 +73,7 @@ export const deleteSale = () => {
     try {
       dispatch(actions.removeSalePending())
 
-      const res = await axios.delete(`${BASE_URL.local}/sales`)
+      const res = await axios.delete(`${BASE_URL}/sales`)
 
       dispatch(actions.removeSaleSuccess(res.data))
 
