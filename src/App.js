@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import TopNav from './components/layout/TopNav'
 import Sale from './components/sales/Sale'
 import SalesList from './components/sales/SalesList'
+import AddSale from './components/sales/AddSale'
 
 //Action creators
 import { fetchAllSales } from './store/sales/actionCreators'
@@ -66,6 +67,7 @@ function App() {
             <Switch>
               <Route exact path='/' component={SalesList} />
               <Route path='/sale/:id' component={Sale} />
+              <Route path='/add-sale' component={AddSale} />
             </Switch>
           </Grid>
           <Grid item sm={3}>

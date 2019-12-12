@@ -1,4 +1,5 @@
 import React from 'react'
+<<<<<<< Updated upstream
 import { Paper, TextField, Typography, Grid, Button, MobileStepper, CardMedia } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 
@@ -122,3 +123,5 @@ const AddSale = () => {
     </Paper>
   );
 }
+=======
+>>>>>>> Stashed changes

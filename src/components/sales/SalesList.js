@@ -46,11 +46,17 @@ const useStyles = makeStyles(theme => ({
 
 const SalesList = () => {
   const dispatch = useDispatch()
-  const sales = useSelector(state => state.sales.all)
   const classes = useStyles()
 
+  //Setting store state
+  const sales = useSelector(state => state.sales.all)
+  
+
+  //Removing sales that have no pictures
+  //Sales require at least 1 picture to post
   const filteredSales = sales.filter(sale => (sale.pictures.length > 0))
 
+  //Get one sale method
   const getOneSale = (id) => {
     dispatch(fetchOneSale(id))
   }
