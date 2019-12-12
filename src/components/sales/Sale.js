@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import { Paper, Typography, Grid, Button, MobileStepper } from '@material-ui/core'
+import { Paper, Typography, Grid, Button, MobileStepper, CardMedia } from '@material-ui/core'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-import CardMedia from '@material-ui/core/CardMedia'
 
 import { fetchOneSale } from '../../store/sales/actionCreators'
 
