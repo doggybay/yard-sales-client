@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.dark,
     color: theme.palette.secondary.contrastText
   }
-}));
+}))
 
 
 const Sale = (props) => {
