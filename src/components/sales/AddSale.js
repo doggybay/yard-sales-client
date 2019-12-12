@@ -1,58 +1,31 @@
+import 'date-fns';
 import React from 'react'
 import { Paper, TextField, Typography, Grid, Button, MobileStepper, CardMedia } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
+import DateFnsUtils from '@date-io/date-fns'
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import 'date-fns';
 
 const useStyles = makeStyles(theme => ({
-  paper: {
+  root: {
     padding: theme.spacing(3, 2),
-    marginTop: 10,
-    color: theme.palette.text.primary,
-    textAlign: "center"
-  },
-  media: {
-    height: 0,
-    paddingTop: "56.25%", // 16:9
     marginTop: 10
   },
-  root: {
-    '& .MuiTextField-root': {
+  form: {
+    "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: 200,
+      
     },
+    marginTop: 10
   },
-  header: {
-    display: "flex",
-    alignItems: "center",
-    height: 50,
-    paddingLeft: theme.spacing(4),
-    backgroundColor: theme.palette.background.default
-  },
-  img: {
-    height: 255,
-    maxWidth: 400,
-    overflow: "hidden",
-    display: "block",
-    width: "100%"
-  },
-  paper1: {
-    padding: theme.spacing(3, 2),
-    marginTop: 10,
-    color: theme.palette.text.primary,
-    textAlign: "center",
-    backgroundColor: theme.palette.secondary.main
-  },
-  paper2: {
-    padding: theme.spacing(3, 2),
-    marginTop: 10,
-    color: theme.palette.text.primary,
-    textAlign: "center",
-    backgroundColor: theme.palette.secondary.light
-  },
-  stepper: {
-    backgroundColor: theme.palette.primary.dark,
-    color: theme.palette.secondary.contrastText
-  },
-  
+  title: {
+    margin: theme.spacing(1),
+    
+  }
 }));
 
 const AddSale = () => {
@@ -60,65 +33,102 @@ const AddSale = () => {
   const classes = useStyles()
   const theme = useTheme()
 
+  const [selectedDate, setSelectedDate] = React.useState(
+    new Date("2014-08-18T21:11:54")
+  );
+
+  const handleDateChange = date => {
+    setSelectedDate(date);
+  };
 
   return (
-    <Paper className={classes.paper1}>
-      <form noValidate autoComplete="off">
+    <Paper className={classes.root}>
+      <Typography variant="h5" component="h3">
+        Add your sale using the form below
+      </Typography>
+      <form className={classes.form} noValidate autoComplete="off">
         <div>
           <TextField
             required
-            id="outlined-required"
-            label="Required"
-            defaultValue="Hello World"
+            id="title"
+            label="Sale Title"
+            defaultValue=""
+            fullWidth
+            variant="outlined"
+            className={classes.title}
+          />
+          <TextField
+            required
+            id="pictures"
+            label="pictures"
+            defaultValue=""
             variant="outlined"
           />
           <TextField
-            disabled
-            id="outlined-disabled"
-            label="Disabled"
-            defaultValue="Hello World"
+            required
+            id="details"
+            label="details"
+            defaultValue=""
+            variant="outlined"
+            multiline
+            rows="4"
+          />
+          <TextField
+            required
+            id="Location"
+            label="location"
+            defaultValue=""
             variant="outlined"
           />
           <TextField
-            id="outlined-password-input"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
+            required
+            id="Location"
+            label="location"
+            defaultValue=""
             variant="outlined"
           />
           <TextField
-            id="outlined-read-only-input"
-            label="Read Only"
-            defaultValue="Hello World"
-            InputProps={{
-              readOnly: true
-            }}
+            required
+            id="Location"
+            label="location"
+            defaultValue=""
             variant="outlined"
           />
-          <TextField
-            id="outlined-number"
-            label="Number"
-            type="number"
-            InputLabelProps={{
-              shrink: true
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-search"
-            label="Search field"
-            type="search"
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-helperText"
-            label="Helper text"
-            defaultValue="Default Value"
-            helperText="Some important text"
-            variant="outlined"
-          />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <Grid container justify="space-around">
+              <KeyboardDatePicker
+                disableToolbar
+                variant="inline"
+                format="MM/dd/yyyy"
+                margin="normal"
+                id="date-picker-inline"
+                label="Date picker inline"
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  "aria-label": "change date"
+                }}
+              />
+
+              <KeyboardTimePicker
+                margin="normal"
+                id="time-picker"
+                label="Time picker"
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  "aria-label": "change time"
+                }}
+              />
+            </Grid>
+          </MuiPickersUtilsProvider>
         </div>
       </form>
     </Paper>
   );
 }
+
+export default AddSale
+
+
+
