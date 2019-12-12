@@ -5,6 +5,8 @@ import { Paper, Typography, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
 import TopNav from './components/layout/TopNav'
+import UserTopNav from './components/layout/UserTopNav'
+import UserSideNav from './components/layout/UserSideNav'
 import Sale from './components/sales/Sale'
 import SalesList from './components/sales/SalesList'
 import AddSale from './components/sales/AddSale'
@@ -49,20 +51,21 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <TopNav />
-
+        {/* <TopNav /> */}
+        <UserTopNav />
         <Grid container spacing={2}>
-          <Grid item sm={3}>
+          <UserSideNav />
+          {/* <Grid item sm={3}>
             <Paper className={classes.paper}>
               <Typography variant="h5" component="h3">
-                This is a sheet of paper.
+                Left sheet of paper.
             </Typography>
               <Typography component="p">
                 Paper can be used to build surface or other elements for your
                 application.
             </Typography>
             </Paper>
-          </Grid>
+          </Grid> */}
           <Grid item sm>
             <Switch>
               <Route exact path='/' component={SalesList} />
@@ -73,12 +76,12 @@ function App() {
           <Grid item sm={3}>
             <Paper className={classes.paper}>
               <Typography variant="h5" component="h3">
-                This is a sheet of paper.
-            </Typography>
+                Right sheet of paper.
+              </Typography>
               <Typography component="p">
                 Paper can be used to build surface or other elements for your
                 application.
-            </Typography>
+              </Typography>
             </Paper>
           </Grid>
         </Grid>
