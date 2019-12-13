@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import React, { useState, Fragment } from 'react'
 import 'date-fns'
 import { Paper, TextField, Typography, Grid, Button, Avatar, MobileStepper } from '@material-ui/core'
@@ -35,14 +36,20 @@ const useStyles = makeStyles(theme => ({
     width: 300
   },
   avatarDiv: {
-    display: 'flex'
+    display: "flex"
   },
   avatar: {
     marginTop: theme.spacing(1),
-    marginRight: theme.spacing(.5)
+    marginRight: theme.spacing(0.5)
   },
   addPicBtn: {
-    display: 'none'
+    display: "none"
+  },
+  stepper: {
+    backgroundColor: theme.palette.primary.light,
+    color: theme.palette.primary.contrastText,
+    padding: theme.spacing(3, 2),
+    marginTop: 10
   }
 }));
 
@@ -76,7 +83,6 @@ const AddSale = () => {
       }
     })
 
-  
   // Component methods
   const handleDateChange = date => {
     setSelectedDate(date)
@@ -95,6 +101,11 @@ const AddSale = () => {
 
   const prevStep = () => {
     setStep(step - 1)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('heard')
   }
 
   // New sale object
@@ -119,11 +130,12 @@ const AddSale = () => {
   switch (step) {
     case 1:
       return (
+        <Fragment>
         <Paper className={classes.root}>
           <Typography variant="h5" component="h3">
             Add your sale using the form below
           </Typography>
-          <form className={classes.form} noValidate autoComplete="off">
+          <form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
             <Grid container>
               <Grid item sm={12}>
                 <TextField
@@ -214,13 +226,13 @@ const AddSale = () => {
               </MuiPickersUtilsProvider>
             </Grid>
           </form>
-          
-          <MobileStepper
+        </Paper>
+        <MobileStepper
             variant="progress"
             steps={3}
             position="static"
             activeStep={step}
-            className={classes.root}
+            className={classes.stepper}
             nextButton={
               <Button
                 size="small"
@@ -249,19 +261,53 @@ const AddSale = () => {
                 Back
               </Button>
             }
-          />
-        </Paper>
-      );
+        />
+        </Fragment>
+      )
     case 2:
       return (
-        
-        <AddSaleConfirm prevStep={prevStep} sale={newSale} pictures={pictures} step={step} />
+        <Fragment>
+          <AddSaleConfirm
+            prevStep={prevStep}
+            sale={newSale}
+            pictures={pictures}
+            step={step}
+            selectedDate={String(selectedDate)}
+          />
+          <MobileStepper
+            variant="progress"
+            steps={3}
+            position="static"
+            activeStep={step}
+            color="secondary"
+            className={classes.stepper}
+            nextButton={
+              <Button type="submit" size="small" onClick={handleSubmit} disabled={step === 3}>
+                Submit
+                {theme.direction === "rtl" ? (
+                  <KeyboardArrowLeft />
+                ) : (
+                  <KeyboardArrowRight />
+                )}
+              </Button>
+            }
+            backButton={
+              <Button size="small" onClick={prevStep} disabled={step === 1}>
+                {theme.direction === "rtl" ? (
+                  <KeyboardArrowRight />
+                ) : (
+                  <KeyboardArrowLeft />
+                )}
+                Back
+              </Button>
+            }
+          />
+        </Fragment>
       )
-    
+    }
   }
-}
 
-export default AddSale
+  export default AddSale
 
 
 

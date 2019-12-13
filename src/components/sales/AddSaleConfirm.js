@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
+import { format } from 'date-fns'
 import { Paper, Typography, Grid, Button, MobileStepper, CardMedia } from '@material-ui/core'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
@@ -69,9 +70,14 @@ const AddSaleConfirm = (props) => {
   const prevStep = props.prevStep
   const pictures = props.pictures
   const step = props.step
+  const selectedDate = props.selectedDate
 
+  //formatting date
+  let saleDate = format(new Date(selectedDate), 'MM/dd/yyyy hh:mm a')
+
+  
   //Picture area
-  //state
+  //State and methods for picture stepper
   const [activeStep, setActiveStep] = useState(0)
 
   const maxSteps = pictures !== "pending" ? pictures.length : 0
@@ -146,59 +152,24 @@ const AddSaleConfirm = (props) => {
             />
           </Paper>
         </Grid>
-        <Grid item sm={6}>
+        <Grid item sm={4}>
           {/*Details*/}
           <Paper className={classes.paper}>
             <Typography variant="body1">{sale.details}</Typography>
           </Paper>
         </Grid>
-        <Grid item sm={6}>
+        <Grid item sm={4}>
           {/*Location*/}
           <Paper className={classes.paper}>
             <Typography variant="body1">{sale.location}</Typography>
           </Paper>
         </Grid>
-        <Grid item sm={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item sm={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item sm={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item sm={3}>
-          <Paper className={classes.paper}>xs=3</Paper>
+        <Grid item sm={4}>
+          <Paper className={classes.paper}>
+            <Typography variant="body1">{saleDate}</Typography>
+          </Paper>
         </Grid>
       </Grid>
-
-      <MobileStepper
-        variant="progress"
-        steps={3}
-        position="static"
-        activeStep={step}
-        
-        nextButton={
-          <Button size="small">
-            Submit
-            {theme.direction === "rtl" ? (
-              <KeyboardArrowLeft />
-            ) : (
-              <KeyboardArrowRight />
-            )}
-          </Button>
-        }
-        backButton={
-          <Button size="small" onClick={prevStep} disabled={step === 1}>
-            {theme.direction === "rtl" ? (
-              <KeyboardArrowRight />
-            ) : (
-              <KeyboardArrowLeft />
-            )}
-            Back
-          </Button>
-        }
-      />
     </Paper>
   );
 }
