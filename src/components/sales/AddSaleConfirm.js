@@ -110,7 +110,7 @@ const AddSaleConfirm = (props) => {
             <CardMedia
               className={classes.media}
               image={pictures[activeStep]}
-              title={pictures[activeStep].id}
+              title={sale.title}
             />
 
             <MobileStepper
