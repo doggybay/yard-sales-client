@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import TopNav from './components/layout/TopNav'
 import UserTopNav from './components/layout/UserTopNav'
 import UserSideNav from './components/layout/UserSideNav'
-import Sale from './components/sales/Sale'
+import Sale from './components/sales/sale/Sale'
 import SalesList from './components/sales/SalesList'
 import AddSale from './components/sales/AddSale'
 
