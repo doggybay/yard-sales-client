@@ -72,6 +72,7 @@ const AddSaleConfirm = (props) => {
   //formatting date
   let saleDate = format(new Date(selectedDate), 'MM/dd/yyyy hh:mm a')
 
+  console.log("sale:", selectedDate)
   
   //Picture area
   //State and methods for picture stepper

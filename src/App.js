@@ -9,7 +9,7 @@ import UserTopNav from './components/layout/UserTopNav'
 import UserSideNav from './components/layout/UserSideNav'
 import Sale from './components/sales/sale/Sale'
 import SalesList from './components/sales/SalesList'
-import AddSale from './components/sales/AddSale'
+import AddSale from './components/sales/forms/sale/AddSale'
 
 //Action creators
 import { fetchAllSales } from './store/sales/actionCreators'

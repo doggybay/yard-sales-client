@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react'
 import DateFnsUtils from '@date-io/date-fns'
-import { Paper, TextField, Typography, Grid, Button, Avatar, MobileStepper } from '@material-ui/core'
+import { Paper, TextField, Typography, Grid, Button, Avatar, IconButton, GridListTile, GridListTileBar, GridList } from '@material-ui/core'
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined'
+import CloseIcon from '@material-ui/icons/Close'
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker, } from '@material-ui/pickers'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 
@@ -19,7 +21,25 @@ const useStyles = makeStyles(theme => ({
     width: 350
   },
   details: {
-    width: 300
+    width: 280
+  },
+  upBtn: {
+    marginLeft: 10
+  },
+  avatar: {
+
+    width: theme.spacing(6),
+    height: theme.spacing(6),
+    margin: theme.spacing(0.5)
+
+  },
+  avatarDiv: {
+    display: "flex",
+    padding: theme.spacing(1),
+    
+  },
+  icon: {
+    color: theme.palette.secondary.light
   }
 }))
 
@@ -28,7 +48,7 @@ const AddSaleForm = (props) => {
 
   const { title, setTitle, details, setDetails, address, setAddress, zipCode, setZipCode, pictures, setPictures, selectedDate, setClickedPicBtn, clickedPicBtn } = props
 
-  const { handleDateChange, handleSubmit } = props
+  const { handleDateChange, handleSubmit, removePic } = props
 
   const widget = window.cloudinary.createUploadWidget(
     {
@@ -50,7 +70,25 @@ const AddSaleForm = (props) => {
     }
   }
 
-  let pictureList = pictures.map(picture => <Avatar className={classes.avatar} src={picture} />)
+
+  let pictureList = pictures.map((picture, i) => (
+    <GridListTile key={i}>
+
+      <img src={picture} alt={title} />
+
+      <GridListTileBar
+        actionIcon={
+          <IconButton aria-label={`info about ${title}`}
+            className={classes.icon}
+            onClick={() => removePic(i)}>
+
+            <CloseIcon />
+
+          </IconButton>
+        }
+      />
+    </GridListTile>
+  ))
 
   return (
     <form
@@ -93,11 +131,12 @@ const AddSaleForm = (props) => {
               onClick={() => widgetOpen()}
               variant="contained"
               color="secondary"
+              
             >
               Add Pictures
             </Button>
 
-            <div className={classes.avatarDiv}>{pictureList}</div>
+            <GridList >{pictureList}</GridList>
           </Fragment>
         </Grid>
 

@@ -1,15 +1,11 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import { Paper, Grid } from '@material-ui/core'
-
-import GridList from '@material-ui/core/GridList';
-
+import GridList from '@material-ui/core/GridList'
 
 import { fetchOneSale } from '../../store/sales/actionCreators'
 
-import SaleCard from './SaleCard'
-import SaleTile from './SaleTile'
+import SaleTile from './sale/SaleTile'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,23 +20,8 @@ const useStyles = makeStyles(theme => ({
     width: 'auto',
     height: 600,
   },
-  subHeader: {
-    backgroundColor: theme.palette.secondary.light,
-    color: theme.palette.secondary.contrastText,
-  },
   icon: {
     color: theme.palette.primary.light
-  },
-  card: {
-    width: 350,
-    marginTop: 15
-  },
-  media: {
-    height: 140
-  },
-  paper: {
-    padding: theme.spacing(3, 2),
-    marginTop: 10,
   }
 }));
 
@@ -50,7 +31,6 @@ const SalesList = () => {
 
   //Setting store state
   const sales = useSelector(state => state.sales.all)
-  
 
   //Removing sales that have no pictures
   //Sales require at least 1 picture to post
@@ -62,7 +42,7 @@ const SalesList = () => {
   }
 
   
-  const listOfCards = filteredSales.map(sale => {
+  const listOfTiles = filteredSales.map(sale => {
     const picture = sale.pictures[0].pic
 
     return (
@@ -74,7 +54,7 @@ const SalesList = () => {
   return (
     <div className={classes.root}>
       <GridList cellHeight={200} className={classes.gridList}>
-        {listOfCards}
+        {listOfTiles}
       </GridList>
     </div>
   );

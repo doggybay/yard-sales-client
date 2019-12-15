@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { format } from 'date-fns'
+import { parseJSON } from 'date-fns'
 import { Paper, Typography, Grid } from '@material-ui/core'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -19,6 +19,15 @@ const useStyles = makeStyles(theme => ({
 const SaleDetails = (props) => {
   const { sale } = props
   const classes = useStyles()
+  
+  let saleDate = sale.hasOwnProperty('id') ? new Intl.DateTimeFormat("en-us", {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true
+  }).format(parseJSON(sale.date_time)) : 'pending date'
 
   return (
     <Fragment>
@@ -44,7 +53,7 @@ const SaleDetails = (props) => {
         <Paper className={classes.paper}>{sale.location}</Paper>
       </Grid>
       <Grid item sm={4}>
-        <Paper className={classes.paper}>{sale.date_time}</Paper>
+        <Paper className={classes.paper}>{saleDate}</Paper>
       </Grid>
       <Grid item sm={2}>
         <Paper className={classes.empty}>xs=3</Paper>

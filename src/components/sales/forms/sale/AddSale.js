@@ -13,9 +13,10 @@ import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons'
 
 // Components
 import AddSaleConfirm from './AddSaleConfirm'
+import AddSaleForm from './AddSaleForm'
 
 // Actions
-import { addNewSale } from '../../store/sales/actionCreators'
+import { addNewSale } from '../../../../store/sales/actionCreators'
 
 // TODO: Clean up styles and move to a file under the corresponding component
 const useStyles = makeStyles(theme => ({
@@ -39,22 +40,30 @@ const useStyles = makeStyles(theme => ({
   details: {
     width: 300
   },
-  avatarDiv: {
-    display: "flex"
-  },
+  
   avatar: {
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(0.5)
+    
+    width: theme.spacing(6),
+    height: theme.spacing(6),
+    
   },
   addPicBtn: {
-    display: "none"
+    height: 157,
+    
   },
   stepper: {
     backgroundColor: theme.palette.primary.light,
     color: theme.palette.primary.contrastText,
     padding: theme.spacing(3, 2),
     marginTop: 10
+  },
+  avatarRoot: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
   }
+
 }));
 
 const AddSale = () => {
@@ -69,7 +78,7 @@ const AddSale = () => {
   const [clickedPicBtn, setClickedPicBtn] = useState(false)
   const [title, setTitle] = useState('')
   const [details, setDetails] = useState('')
-  const [pictures, setPictures] = useState([])
+  let [pictures, setPictures] = useState([])
   const [address, setAddress] = useState('')
   const [zipCode, setZipCode] = useState('')
   const [step, setStep] = useState(1)
@@ -114,6 +123,13 @@ const AddSale = () => {
     dispatch(addNewSale(newSale))
   }
 
+  const removePic = (pic) => {
+    console.log(pictures)
+    pictures.splice(pic, 1)
+    console.log(pictures)
+    setPictures([...pictures])
+  }
+
   // New sale object
   const newSale = {
     user_id: 8,
@@ -124,16 +140,6 @@ const AddSale = () => {
     pictures: pictures
   }
 
-  // Picture object
-    // pictures = [
-    //   "https://loremflickr.com/320/240/bridges",
-    //   "https://loremflickr.com/320/240/toys",
-    //   "https://loremflickr.com/320/240/ocean",
-    //   "https://loremflickr.com/320/240/bread",
-    //   "https://loremflickr.com/320/240/door"
-    // ]
-  
-  let pictureList = pictures.map(picture => <Avatar className={classes.avatar} src={picture} />)
 
   switch (step) {
     case 1:
@@ -143,97 +149,19 @@ const AddSale = () => {
           <Typography variant="h5" component="h3">
             Add your sale using the form below
           </Typography>
-          <form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
-            <Grid container>
-              <Grid item sm={12}>
-                <TextField
-                  required
-                  id="title"
-                  label="Sale Title"
-                  defaultValue={title}
-                  fullWidth
-                  variant="outlined"
-                  className={classes.title}
-                  onChange={e => setTitle(e.target.value)}
-                />
-              </Grid>
-
-              <Grid item sm={6}>
-                <TextField
-                  id="details"
-                  label="Sale details"
-                  defaultValue={details}
-                  variant="outlined"
-                  multiline
-                  rows="6"
-                  className={classes.details}
-                  onChange={e => setDetails(e.target.value)}
-                />
-              </Grid>
-
-              {/*Picture upload button*/}
-              <Grid item sm={6}>
-                <Fragment>
-                  <Button
-                    onClick={() => widgetOpen()}
-                    variant="contained"
-                    color="secondary"
-                  >
-                    Add Pictures
-                  </Button>
-
-                  <div className={classes.avatarDiv}>{pictureList}</div>
-                </Fragment>
-              </Grid>
-
-              <TextField
-                required
-                id="address"
-                label="Sale location"
-                defaultValue={address}
-                variant="outlined"
-                className={classes.address}
-                onChange={e => setAddress(e.target.value)}
-              />
-
-              <TextField
-                required
-                id="zipCode"
-                label="Zip Code"
-                defaultValue={zipCode}
-                variant="outlined"
-                onChange={e => setZipCode(e.target.value)}
-              />
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid container justify="space-around">
-                  <KeyboardDatePicker
-                    required
-                    margin="normal"
-                    id="saleDate"
-                    label="Sale date"
-                    format="MM/dd/yyyy"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      "aria-label": "change date"
-                    }}
-                  />
-
-                  <KeyboardTimePicker
-                    required
-                    margin="normal"
-                    id="saleTime"
-                    label="Sale time"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      "aria-label": "change time"
-                    }}
-                  />
-                </Grid>
-              </MuiPickersUtilsProvider>
-            </Grid>
-          </form>
+            <AddSaleForm
+              title={title} setTitle={setTitle}
+              details={details} setDetails={setDetails}
+              address={address} setAddress={setAddress}
+              zipCode={zipCode} setZipCode={setZipCode}
+              pictures={pictures} setPictures={setPictures}
+              clickedPicBtn={clickedPicBtn} setClickedPicBtn={setClickedPicBtn}
+              selectedDate={selectedDate}
+              handleDateChange={handleDateChange}
+              handleSubmit={handleSubmit}
+              removePic={removePic}
+            />
+            
         </Paper>
         <MobileStepper
             variant="progress"
