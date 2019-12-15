@@ -11,7 +11,7 @@ new sale object will be
 
 post request will be to sales
 
-sales will need to take the request and add to the sale table and to the picturs table.
+sales will need to take the request and add to the sale table and to the pictures table.
 
 
 [
@@ -21,3 +21,9 @@ sales will need to take the request and add to the sale table and to the picturs
     pic: 'https://loremflickr.com/320/240/{{random("toy", "house", "furniture", "chair", "desk", "computer", "bed", "cloths")}}'
   }
 ]
+
+check the new sale object and on submit once new component is implemented
+
+submit needs to dispatch the add new sale 
+
+add new sale will take care of the rest
