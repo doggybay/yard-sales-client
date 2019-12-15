@@ -1,6 +1,6 @@
 /* eslint-disable default-case */
 import React, { useState, Fragment } from 'react'
-import 'date-fns'
+import { useDispatch } from 'react-redux'
 import { Paper, TextField, Typography, Grid, Button, Avatar, MobileStepper } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import DateFnsUtils from '@date-io/date-fns'
@@ -11,7 +11,11 @@ import {
 } from '@material-ui/pickers'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons'
 
+// Components
 import AddSaleConfirm from './AddSaleConfirm'
+
+// Actions
+import { addNewSale } from '../../store/sales/actionCreators'
 
 // TODO: Clean up styles and move to a file under the corresponding component
 const useStyles = makeStyles(theme => ({
@@ -54,6 +58,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const AddSale = () => {
+  const dispatch = useDispatch()
+
   // Component style classes
   const classes = useStyles()
   const theme = useTheme()
@@ -63,7 +69,7 @@ const AddSale = () => {
   const [clickedPicBtn, setClickedPicBtn] = useState(false)
   const [title, setTitle] = useState('')
   const [details, setDetails] = useState('')
-  let [pictures, setPictures] = useState([])
+  const [pictures, setPictures] = useState([])
   const [address, setAddress] = useState('')
   const [zipCode, setZipCode] = useState('')
   const [step, setStep] = useState(1)
@@ -105,25 +111,27 @@ const AddSale = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('heard')
+    dispatch(addNewSale(newSale))
   }
 
   // New sale object
   const newSale = {
+    user_id: 8,
     title: title,
     details: details,
     location: `${address}, ${zipCode}`,
-    date_time: selectedDate
+    date_time: selectedDate,
+    pictures: pictures
   }
 
   // Picture object
-    pictures = [
-      "https://loremflickr.com/320/240/bridges",
-      "https://loremflickr.com/320/240/toys",
-      "https://loremflickr.com/320/240/ocean",
-      "https://loremflickr.com/320/240/bread",
-      "https://loremflickr.com/320/240/door"
-    ];
+    // pictures = [
+    //   "https://loremflickr.com/320/240/bridges",
+    //   "https://loremflickr.com/320/240/toys",
+    //   "https://loremflickr.com/320/240/ocean",
+    //   "https://loremflickr.com/320/240/bread",
+    //   "https://loremflickr.com/320/240/door"
+    // ]
   
   let pictureList = pictures.map(picture => <Avatar className={classes.avatar} src={picture} />)
 

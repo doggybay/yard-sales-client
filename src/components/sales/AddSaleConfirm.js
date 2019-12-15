@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import React, { useState } from 'react'
 import { format } from 'date-fns'
 import { Paper, Typography, Grid, Button, MobileStepper, CardMedia } from '@material-ui/core'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 
-import { fetchOneSale } from '../../store/sales/actionCreators'
 
 //component styles
 const useStyles = makeStyles(theme => ({
