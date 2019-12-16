@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2),
     marginTop: 10,
-    color: theme.palette.text.primary,
+    
     textAlign: "center",
     backgroundColor: theme.palette.secondary.main
   }
@@ -30,7 +30,7 @@ const Sale = (props) => {
 
   return (
     <Paper className={classes.root}>
-      <Typography variant="h2">
+      <Typography color="inherit" variant="h2">
         {sale.title}
       </Typography>
       <Grid container spacing={3}>
