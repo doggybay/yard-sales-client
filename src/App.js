@@ -51,8 +51,8 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* <TopNav /> */}
-        <UserTopNav />
+        {/* <UserTopNav /> */}
+        <TopNav />
         <Grid container spacing={2}>
           <UserSideNav />
           {/* <Grid item sm={3}>
