@@ -10,9 +10,11 @@ import UserSideNav from './components/layout/UserSideNav'
 import Sale from './components/sales/sale/Sale'
 import SalesList from './components/sales/SalesList'
 import AddSale from './components/sales/forms/sale/AddSale'
+import MySalesList from './components/sales/MySalesList'
 
 //Action creators
 import { fetchAllSales } from './store/sales/actionCreators'
+import { fetchOneUser } from './store/users/actionCreators'
 
 //TODO
 // Check ip or a way to find out where im at
@@ -46,13 +48,14 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchAllSales())
+    dispatch(fetchOneUser(8))
   })
 
   return (
     <Router>
       <div className="App">
-        {/* <UserTopNav /> */}
-        <TopNav />
+        {/* <TopNav /> */}
+        <UserTopNav />
         <Grid container spacing={2}>
           <UserSideNav />
           {/* <Grid item sm={3}>
@@ -71,6 +74,7 @@ function App() {
               <Route exact path='/' component={SalesList} />
               <Route path='/sale/:id' component={Sale} />
               <Route path='/add-sale' component={AddSale} />
+              <Route path='/user-sales' component={MySalesList} />
             </Switch>
           </Grid>
           <Grid item sm={3}>

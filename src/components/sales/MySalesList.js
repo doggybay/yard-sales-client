@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import GridList from '@material-ui/core/GridList'
 import { useLocation } from 'react-router-dom'
 
-import { fetchOneSale } from '../../store/sales/actionCreators'
+import { fetchOneSale, deleteSale } from '../../store/sales/actionCreators'
 
 import SaleTile from './sale/SaleTile'
 
@@ -24,38 +24,46 @@ const useStyles = makeStyles(theme => ({
   icon: {
     color: theme.palette.secondary.light
   },
+  iconD: {
+    color: theme.palette.secondary.light
+  },
   empty: {
     display: 'none'
   }
 }));
 
-const SalesList = () => {
+const MySalesList = () => {
   const dispatch = useDispatch()
   const classes = useStyles()
   const location = useLocation()
-
   //Setting store state
-  const sales = useSelector(state => state.sales.all)
-
+  const user = useSelector(state => state.users.oneUser)
+  
+  const sales = useSelector(state => state.sales.all.filter(sale => sale.user_id === user.id))
   //Removing sales that have no pictures
   //Sales require at least 1 picture to post
-  const filteredSales = sales.filter(sale => (sale.pictures.length > 0))
+  //const filteredSales = sales.filter(sale => (sale.pictures.length > 0))
 
   //Get one sale method
   const getOneSale = (id) => {
     dispatch(fetchOneSale(id))
   }
 
-  
-  const listOfTiles = filteredSales.map(sale => {
-    const picture = sale.pictures[0].pic
+  const deleteOneSale = (id) => {
+    dispatch(deleteSale(id))
+  }
+
+  const id = user.id
+
+  const listOfTiles = sales ? sales.map(sale => {
+    const picture = sale ? sale.pictures[0].pic : ''
 
     return (
-      SaleTile({ sale, picture, classes, getOneSale, location })
+      SaleTile({ sale, picture, classes, getOneSale, deleteOneSale, id, location })
     )
-  })
+  }) : {}
 
-  
+
   return (
     <div className={classes.root}>
       <GridList cellHeight={200} className={classes.gridList}>
@@ -65,4 +73,4 @@ const SalesList = () => {
   );
 }
 
-export default SalesList
+export default MySalesList

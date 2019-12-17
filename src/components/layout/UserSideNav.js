@@ -3,7 +3,6 @@ import { Paper, Typography, Grid, MenuList, MenuItem, Button } from '@material-u
 import { makeStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 
-
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -34,7 +33,7 @@ const UserSideNav = () => {
       <Paper className={classes.root}>
         <MenuList>
           <MenuItem component={Link} to="/">My Details</MenuItem>
-          <MenuItem>My Sales</MenuItem>
+          <MenuItem component={Link} to="/user-sales">My Sales</MenuItem>
           <MenuItem component={Link} to="/add-sale">Add A Sale</MenuItem>
           <MenuItem component={Link} to="/">All Sales</MenuItem>
         </MenuList>
