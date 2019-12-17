@@ -1,6 +1,7 @@
 /* eslint-disable default-case */
 import React, { useState, Fragment } from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { Paper, TextField, Typography, Grid, Button, Avatar, MobileStepper } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import DateFnsUtils from '@date-io/date-fns'
@@ -68,7 +69,7 @@ const useStyles = makeStyles(theme => ({
 
 const AddSale = () => {
   const dispatch = useDispatch()
-
+  const history = useHistory()
   // Component style classes
   const classes = useStyles()
   const theme = useTheme()
@@ -78,11 +79,20 @@ const AddSale = () => {
   const [clickedPicBtn, setClickedPicBtn] = useState(false)
   const [title, setTitle] = useState('')
   const [details, setDetails] = useState('')
-  let [pictures, setPictures] = useState([])
+  const [pictures, setPictures] = useState([])
   const [address, setAddress] = useState('')
   const [zipCode, setZipCode] = useState('')
   const [step, setStep] = useState(1)
 
+  // New sale object
+  const newSale = {
+    user_id: 8,
+    title: title,
+    details: details,
+    location: `${address}, ${zipCode}`,
+    date_time: selectedDate,
+    pictures: pictures
+  }
 
   // Cloudinary widget instance to upload images
   let widget = window.cloudinary.createUploadWidget(
@@ -120,7 +130,11 @@ const AddSale = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    
     dispatch(addNewSale(newSale))
+
+    history.push('/')
+
   }
 
   const removePic = (pic) => {
@@ -129,17 +143,6 @@ const AddSale = () => {
     console.log(pictures)
     setPictures([...pictures])
   }
-
-  // New sale object
-  const newSale = {
-    user_id: 8,
-    title: title,
-    details: details,
-    location: `${address}, ${zipCode}`,
-    date_time: selectedDate,
-    pictures: pictures
-  }
-
 
   switch (step) {
     case 1:
