@@ -34,6 +34,29 @@ export default (state = initialState, action) => {
     case constants.USER_LOGIN_SUCCESS:
       return { ...state, loggedInUser: action.payload }
     
+    case constants.ADD_NEW_USER_SUCCESS:
+      return { ...state, all: [...state.all, action.payload] }
+    
+    case constants.EDIT_USER_SUCCESS:
+      return {
+        ...state,
+        all: state.all.reduce((newUsers, user) => {
+          if (!newUsers.includes(user.id)) {
+            if (user.id === action.payload.id) {
+              newUsers.push(action.payload)
+            } else {
+              newUsers.push(user)
+            }
+          }
+          return newUsers
+        }, [])
+      }
+    
+    case constants.REMOVE_USER_SUCCESS:
+      return {
+        ...state,
+        all: state.all.filter(user => user.id !== action.payload.id)
+      }
     
     default:
       return state
