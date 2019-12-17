@@ -29,7 +29,29 @@ export default (state = initialState, action) => {
     case constants.FETCH_ONE_SALE_SUCCESS:
       return { ...state, one: action.payload }
     
+    case constants.ADD_NEW_SALE_SUCCESS:
+      return { ...state, all: [...state.all, action.payload] }
     
+    case constants.EDIT_SALE_SUCCESS:
+      return {
+        ...state,
+        all: state.all.reduce((newSales, sale) => {
+          if (!newSales.includes(sale.id)) {
+            if (sale.id === action.payload.id) {
+              newSales.push(action.payload)
+            } else {
+              newSales.push(sale)
+            }
+          }
+          return newSales
+        }, [])
+      }
+    
+    case constants.REMOVE_SALE_SUCCESS:
+      return {
+        ...state,
+        all: state.all.filter(sale => sale.id !== action.payload.id)
+      }
     
     default:
       return state

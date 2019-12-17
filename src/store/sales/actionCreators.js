@@ -53,12 +53,12 @@ export const editSale = (id) => {
   }
 }
 
-export const addNewSale = () => {
+export const addNewSale = (newSale) => {
   return async (dispatch) => {
     try {
       dispatch(actions.addNewSalePending())
 
-      const res = await axios.post(`${BASE_URL}/sales`)
+      const res = await axios.post(`${BASE_URL}/sales`, newSale)
 
       dispatch(actions.addNewSaleSuccess(res.data))
 
@@ -68,12 +68,12 @@ export const addNewSale = () => {
   }
 }
 
-export const deleteSale = () => {
+export const deleteSale = (id) => {
   return async (dispatch) => {
     try {
       dispatch(actions.removeSalePending())
 
-      const res = await axios.delete(`${BASE_URL}/sales`)
+      const res = await axios.delete(`${BASE_URL}/sales/${id}`)
 
       dispatch(actions.removeSaleSuccess(res.data))
 
