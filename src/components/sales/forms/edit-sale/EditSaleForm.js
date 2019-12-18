@@ -74,24 +74,27 @@ const EditSaleForm = (props) => {
   }
 
 
-  let pictureList = pictures.map((picture, i) => (
-    <GridListTile key={i}>
+  let pictureList = pictures.map((picture, i) => {
+    let formattedPic = picture.hasOwnProperty('pic') ? picture.pic : picture
 
-      <img src={picture} alt={title} />
+    return (
+      <GridListTile key={i}>
+        <img src={formattedPic} alt={title} />
 
-      <GridListTileBar
-        actionIcon={
-          <IconButton aria-label={`info about ${title}`}
-            className={classes.icon}
-            onClick={() => removePic(i)}>
-
-            <CloseIcon />
-
-          </IconButton>
-        }
-      />
-    </GridListTile>
-  ))
+        <GridListTileBar
+          actionIcon={
+            <IconButton
+              aria-label={`info about ${title}`}
+              className={classes.icon}
+              onClick={() => removePic(i)}
+            >
+              <CloseIcon />
+            </IconButton>
+          }
+        />
+      </GridListTile>
+    );
+  })
 
   return (
     <form
