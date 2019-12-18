@@ -40,11 +40,12 @@ const MySalesList = () => {
   //Setting store state
   const user = useSelector(state => state.users.oneUser)
   
-  const sales = useSelector(state => state.sales.all.filter(sale => sale.user_id === user.id))
+  const sales = useSelector(state => state.sales.all.filter(sale => user.id === sale.user_id))
+  const filteredSales = sales.filter(sale => (sale.pictures.length > 0))
   //Removing sales that have no pictures
   //Sales require at least 1 picture to post
   //const filteredSales = sales.filter(sale => (sale.pictures.length > 0))
-
+  
   //Get one sale method
   const getOneSale = (id) => {
     dispatch(fetchOneSale(id))
@@ -61,19 +62,29 @@ const MySalesList = () => {
 
   const id = user.id
 
-  const listOfTiles = sales ? sales.map(sale => {
-    const picture = sale ? sale.pictures[0].pic : ''
-
+  const myListOfSales = filteredSales.map(sale => {
+    
+    let picture = sale.pictures[0].pic
     return (
       SaleTile({ sale, picture, classes, getOneSale, deleteOneSale, id, location, editOneSale })
     )
-  }) : {}
+  })
+  
+
+  // const listOfTiles = sales ? sales.map(sale => {
+    
+  //   let picture = sale.pictures[0].pic
+
+  //   return (
+  //     SaleTile({ sale, picture, classes, getOneSale, deleteOneSale, id, location, editOneSale })
+  //   )
+  // }) : {}
 
 
   return (
     <div className={classes.root}>
       <GridList cellHeight={200} className={classes.gridList}>
-        {listOfTiles}
+        {myListOfSales}
       </GridList>
     </div>
   );

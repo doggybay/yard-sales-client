@@ -78,7 +78,7 @@ const EditSaleConfirm = props => {
   let saleDate = format(new Date(selectedDate), "MM/dd/yyyy hh:mm a");
 
   //Picture area
-
+  console.log('pics: ', picturesToFormat)
   const pictures = picturesToFormat.map(picture => picture.pic);
 
 

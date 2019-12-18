@@ -10,8 +10,8 @@ import EditIcon from '@material-ui/icons/Edit'
 import { fetchOneSale } from '../../../store/sales/actionCreators'
 
 
-const SaleTile = ({ sale, picture, getOneSale, classes, deleteOneSale, location,  }) => {
-  const dispatch = useDispatch()
+const SaleTile = ({ sale, picture, getOneSale, classes, deleteOneSale, location, editOneSale }) => {
+  //const dispatch = useDispatch()
   let saleDate = sale.hasOwnProperty('id') ? new Intl.DateTimeFormat("en-us", {
     month: 'short',
     day: '2-digit',
@@ -23,10 +23,7 @@ const SaleTile = ({ sale, picture, getOneSale, classes, deleteOneSale, location,
 
   
 
-  const editOneSale = (saleId, userId) => {
-    dispatch(fetchOneSale(saleId));
-    // dispatch(fetchOneUser(userId))
-  };
+  
   
 
   return (

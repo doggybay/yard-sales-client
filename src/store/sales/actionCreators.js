@@ -37,13 +37,13 @@ export const fetchOneSale = (id) => {
   }
 }
 
-export const editSale = (id) => {
+export const editSale = (id, updatedSale) => {
 
   return async (dispatch) => {
     try {
       dispatch(actions.editSalePending())
 
-      const res = await axios.patch(`${BASE_URL}/sales/${id}`)
+      const res = await axios.patch(`${BASE_URL}/sales/${id}`, updatedSale)
 
       dispatch(actions.editSaleSuccess(res.data))
 

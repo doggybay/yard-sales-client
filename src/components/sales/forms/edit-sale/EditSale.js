@@ -1,6 +1,7 @@
 /* eslint-disable default-case */
 import React, { useState, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { parseJSON } from 'date-fns'
 import { useHistory } from 'react-router-dom'
 import { Paper, Typography, Button, MobileStepper } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
@@ -11,7 +12,7 @@ import EditSaleConfirm from './EditSaleConfirm'
 import EditSaleForm from './EditSaleForm'
 
 // Actions
-import { addNewSale } from '../../../../store/sales/actionCreators'
+import { editSale } from '../../../../store/sales/actionCreators'
 
 // TODO: Clean up styles and move to a file under the corresponding component
 const useStyles = makeStyles(theme => ({
@@ -62,7 +63,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const EditSale = (props) => {
-  const sale = useSelector(state => state.sales.one)
+  const sale = useSelector(state => state.sales.one) || props.sale
   const dispatch = useDispatch()
   const history = useHistory()
   // Component style classes
@@ -72,13 +73,19 @@ const EditSale = (props) => {
   const saleLength = sale.hasOwnProperty('id') ? sale.location.length - 7 : 0
   const saleAddress = sale.hasOwnProperty('id') ? sale.location.slice(0,saleLength) : ''
   const saleZip = sale.hasOwnProperty('id') ? sale.location.slice(-5) : ''
+  const saleDate = sale.hasOwnProperty('id') ? new Intl.DateTimeFormat("en-us", {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true
+  }).format(parseJSON(sale.date_time)) : new Date()
   
-  
-  console.log("sale address", saleAddress)
 
 
   // State
-  const [selectedDate, setSelectedDate] = useState(new Date())
+  const [selectedDate, setSelectedDate] = useState(sale.hasOwnProperty('id') ? saleDate : new Date())
   const [clickedPicBtn, setClickedPicBtn] = useState(false)
   const [title, setTitle] = useState(sale.hasOwnProperty('id') ? sale.title : '')
   const [details, setDetails] = useState(sale.hasOwnProperty('id') ? sale.details : '')
@@ -89,6 +96,7 @@ const EditSale = (props) => {
 
   // New sale object
   const newSale = {
+    id: sale.id,
     user_id: 1,
     title: title,
     details: details,
@@ -134,7 +142,7 @@ const EditSale = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     
-    dispatch(addNewSale(newSale))
+    dispatch(editSale(sale.id, newSale))
 
     history.push('/')
 
@@ -146,8 +154,6 @@ const EditSale = (props) => {
     
     setPictures([...pictures])
   }
-
-  console.log("newSale: ", newSale)
 
   switch (step) {
     case 1:
