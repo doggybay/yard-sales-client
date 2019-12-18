@@ -71,8 +71,7 @@ const EditSale = (props) => {
   const filteredUserSales = userSales.filter(sale => sale.id === Number(params.id))
 
   const sale = filteredUserSales[0]
-  console.log('user in editSale: ', filteredUserSales)
-  console.log('params', params)
+  
   const dispatch = useDispatch()
   const history = useHistory()
   // Component style classes
