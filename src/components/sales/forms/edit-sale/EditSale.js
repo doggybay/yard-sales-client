@@ -1,7 +1,7 @@
 /* eslint-disable default-case */
 import React, { useState, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { parseJSON } from 'date-fns'
 import { useHistory } from 'react-router-dom'
 import { Paper, Typography, Button, MobileStepper } from '@material-ui/core'
@@ -64,7 +64,15 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const EditSale = (props) => {
-  const sale = useSelector(state => state.sales.one) || props.sale
+  const params = useParams()
+  // const sale = useSelector(state => state.sales.one) || props.sale
+  const userSales = useSelector(state => state.users.oneUser.sales)
+
+  const filteredUserSales = userSales.filter(sale => sale.id === Number(params.id))
+
+  const sale = filteredUserSales[0]
+  console.log('user in editSale: ', filteredUserSales)
+  console.log('params', params)
   const dispatch = useDispatch()
   const history = useHistory()
   // Component style classes
@@ -125,12 +133,12 @@ const EditSale = (props) => {
     setSelectedDate(date)
   }
 
-  const widgetOpen = () => {
-    if (!clickedPicBtn) {
-      setClickedPicBtn(true)
-      widget.open()
-    }
-  }
+  // const widgetOpen = () => {
+  //   if (!clickedPicBtn) {
+  //     setClickedPicBtn(true)
+  //     widget.open()
+  //   }
+  // }
 
   const nextStep = () => {
     setStep(step + 1)
@@ -145,7 +153,7 @@ const EditSale = (props) => {
     
     dispatch(editSale(sale.id, newSale))
 
-    // history.push('/user-sales')
+    history.push('/user-sales')
 
   }
 

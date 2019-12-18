@@ -7,6 +7,27 @@ let initialState = {
 }
 
 export default (state = initialState, action) => {
+
+  const updateState = (stateArr, updatedObj) => {
+  let newState = []
+
+  for (let i= 0; i < stateArr.length; i++){
+    if(!newState.includes(stateArr[i].id)){
+      if(stateArr[i].id === updatedObj.id){
+        newState.push(updatedObj)
+        } else {
+        newState.push(stateArr[i])
+      }
+    } else{
+      console.log('there')
+    }
+    
+
+    }
+
+  return newState
+  }
+  
   switch (action.type) {
     
     case constants.FETCH_ALL_SALES_PENDING:
@@ -35,17 +56,7 @@ export default (state = initialState, action) => {
     case constants.EDIT_SALE_SUCCESS:
       return {
         ...state,
-        all: state.all.reduce((acc, sale) => {
-          acc=[]
-          console.log('acc: ', acc)
-          
-          if (sale.id === action.payload.id) {
-            console.log('sale: ', sale)
-            console.log('payload ', action.payload)
-            acc.push(action.payload)
-          }
-          console.log('reducer: ', acc)
-        }, [])
+        all: updateState(state.all, action.payload)
       }
     
     case constants.REMOVE_SALE_SUCCESS:
