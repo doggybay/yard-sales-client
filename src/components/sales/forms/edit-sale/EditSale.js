@@ -1,20 +1,14 @@
 /* eslint-disable default-case */
 import React, { useState, Fragment } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { Paper, TextField, Typography, Grid, Button, Avatar, MobileStepper } from '@material-ui/core'
+import { Paper, Typography, Button, MobileStepper } from '@material-ui/core'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
-import DateFnsUtils from '@date-io/date-fns'
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons'
 
 // Components
-import AddSaleConfirm from './AddSaleConfirm'
-import AddSaleForm from './AddSaleForm'
+import EditSaleConfirm from './EditSaleConfirm'
+import EditSaleForm from './EditSaleForm'
 
 // Actions
 import { addNewSale } from '../../../../store/sales/actionCreators'
@@ -65,14 +59,19 @@ const useStyles = makeStyles(theme => ({
     },
   }
 
-}));
+}))
 
-const AddSale = () => {
+const EditSale = (props) => {
+  const sale = useSelector(state => state.sales.one) || props.sale;
   const dispatch = useDispatch()
   const history = useHistory()
   // Component style classes
   const classes = useStyles()
   const theme = useTheme()
+
+  
+  //const saleAddress = sale.location.slice(-5)
+  console.log('address', sale)
 
   // State
   const [selectedDate, setSelectedDate] = useState(new Date())
@@ -150,9 +149,9 @@ const AddSale = () => {
         <Fragment>
         <Paper className={classes.root}>
           <Typography variant="h5" component="h3">
-            Add your sale using the form below
+            Update your sale using the form below
           </Typography>
-            <AddSaleForm
+            <EditSaleForm
               title={title} setTitle={setTitle}
               details={details} setDetails={setDetails}
               address={address} setAddress={setAddress}
@@ -163,6 +162,7 @@ const AddSale = () => {
               handleDateChange={handleDateChange}
               handleSubmit={handleSubmit}
               removePic={removePic}
+              id={sale.id}
             />
             
         </Paper>
@@ -206,7 +206,7 @@ const AddSale = () => {
     case 2:
       return (
         <Fragment>
-          <AddSaleConfirm
+          <EditSaleConfirm
             prevStep={prevStep}
             sale={newSale}
             pictures={pictures}
@@ -246,7 +246,4 @@ const AddSale = () => {
     }
   }
 
-  export default AddSale
-
-
-
+  export default EditSale

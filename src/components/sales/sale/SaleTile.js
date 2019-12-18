@@ -4,9 +4,10 @@ import { Link, useLocation } from 'react-router-dom'
 import { GridListTile, GridListTileBar, IconButton } from '@material-ui/core'
 import InfoIcon from '@material-ui/icons/Info'
 import CloseIcon from '@material-ui/icons/Close'
+import EditIcon from '@material-ui/icons/Edit'
 
 
-const SaleTile = ({ sale, picture, getOneSale, classes, deleteOneSale, id, location }) => {
+const SaleTile = ({ sale, picture, getOneSale, classes, deleteOneSale, location }) => {
   
   let saleDate = sale.hasOwnProperty('id') ? new Intl.DateTimeFormat("en-us", {
     month: 'short',
@@ -19,42 +20,58 @@ const SaleTile = ({ sale, picture, getOneSale, classes, deleteOneSale, id, locat
 
   
 
-  console.log('loc',location)
+  
   
 
   return (
     <GridListTile key={sale.id}>
-
       <img src={picture} alt={sale.title} />
 
       <GridListTileBar
         title={sale.title}
         subtitle={<span>on {saleDate}</span>}
-        component={Link} to={`/sale/${sale.id}`}
-        onClick={() => getOneSale(sale.id)}
+        
         actionIcon={
           <>
-          <IconButton aria-label={`info about ${sale.title}`}
-            className={classes.icon}
-            component={Link} to={`/sale/${sale.id}`}
-            onClick={() => getOneSale(sale.id)}>
-            
-            <InfoIcon />
-            
-          </IconButton>
-          <IconButton aria-label={`info about ${sale.title}`}
-            className={location.pathname === '/user-sales' ? classes.iconD : classes.empty}
-            component={Link} to={`/user-sales`}
-            onClick={() => deleteOneSale(sale.id)}>
-
-            <CloseIcon />
-
-          </IconButton>
+            <IconButton
+              aria-label={`info about ${sale.title}`}
+              className={classes.icon}
+              component={Link}
+              to={`/sale/${sale.id}`}
+              onClick={() => getOneSale(sale.id)}
+            >
+              <InfoIcon />
+            </IconButton>
+            <IconButton
+              aria-label={`info about ${sale.title}`}
+              
+              component={Link}
+              className={
+                location.pathname === "/user-sales" ? classes.icon : classes.empty
+              }
+              to={`/edit-user-sale/${sale.id}`}
+              onClick={() => getOneSale(sale.id)}
+            >
+              <EditIcon />
+            </IconButton>
+            <IconButton
+              aria-label={`info about ${sale.title}`}
+              className={
+                location.pathname === "/user-sales"
+                  ? classes.iconD
+                  : classes.empty
+              }
+              component={Link}
+              to={`/user-sales`}
+              onClick={() => deleteOneSale(sale.id)}
+            >
+              <CloseIcon />
+            </IconButton>
           </>
         }
       />
     </GridListTile>
-  )
+  );
 }
 
 export default SaleTile

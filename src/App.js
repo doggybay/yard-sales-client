@@ -11,15 +11,11 @@ import Sale from './components/sales/sale/Sale'
 import SalesList from './components/sales/SalesList'
 import AddSale from './components/sales/forms/sale/AddSale'
 import MySalesList from './components/sales/MySalesList'
+import EditSale from './components/sales/forms/edit-sale/EditSale'
 
 //Action creators
 import { fetchAllSales } from './store/sales/actionCreators'
 import { fetchOneUser } from './store/users/actionCreators'
-
-//TODO
-// Check ip or a way to find out where im at
-// const ip = require('ip')
-// let ipAddress = ip.not('127.0.0.1')
 
 
 const useStyles = makeStyles(theme => ({
@@ -75,6 +71,7 @@ function App() {
               <Route path='/sale/:id' component={Sale} />
               <Route path='/add-sale' component={AddSale} />
               <Route path='/user-sales' component={MySalesList} />
+              <Route path='/edit-user-sale/:id' component={EditSale} />
             </Switch>
           </Grid>
           <Grid item sm={3}>
