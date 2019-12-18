@@ -39,8 +39,10 @@ const SalesList = () => {
 
   //Removing sales that have no pictures
   //Sales require at least 1 picture to post
+  
   const filteredSales = sales.filter(sale => (sale.pictures.length > 0))
 
+  console.log("list",sales)
   //Get one sale method
   const getOneSale = (id) => {
     dispatch(fetchOneSale(id))

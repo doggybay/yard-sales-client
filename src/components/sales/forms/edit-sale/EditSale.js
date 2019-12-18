@@ -1,6 +1,7 @@
 /* eslint-disable default-case */
 import React, { useState, Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { parseJSON } from 'date-fns'
 import { useHistory } from 'react-router-dom'
 import { Paper, Typography, Button, MobileStepper } from '@material-ui/core'
@@ -144,7 +145,7 @@ const EditSale = (props) => {
     
     dispatch(editSale(sale.id, newSale))
 
-    history.push('/')
+    // history.push('/user-sales')
 
   }
 
@@ -233,7 +234,7 @@ const EditSale = (props) => {
             color="secondary"
             className={classes.stepper}
             nextButton={
-              <Button type="submit" size="small" onClick={handleSubmit} disabled={step === 3}>
+              <Button type="submit" size="small" onClick={handleSubmit} disabled={step === 3} component={Link} to={'/user-sales'}>
                 Submit
                 {theme.direction === "rtl" ? (
                   <KeyboardArrowLeft />

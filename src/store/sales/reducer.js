@@ -35,15 +35,16 @@ export default (state = initialState, action) => {
     case constants.EDIT_SALE_SUCCESS:
       return {
         ...state,
-        all: state.all.reduce((newSales, sale) => {
-          if (!newSales.includes(sale.id)) {
-            if (sale.id === action.payload.id) {
-              newSales.push(action.payload)
-            } else {
-              newSales.push(sale)
-            }
+        all: state.all.reduce((acc, sale) => {
+          acc=[]
+          console.log('acc: ', acc)
+          
+          if (sale.id === action.payload.id) {
+            console.log('sale: ', sale)
+            console.log('payload ', action.payload)
+            acc.push(action.payload)
           }
-          return newSales
+          console.log('reducer: ', acc)
         }, [])
       }
     
