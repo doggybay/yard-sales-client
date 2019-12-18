@@ -70,7 +70,7 @@ const EditSaleConfirm = props => {
 
   const sale = props.sale;
   const prevStep = props.prevStep;
-  const pictures = props.pictures;
+  const picturesToFormat = props.pictures;
   const step = props.step;
   const selectedDate = props.selectedDate;
 
@@ -78,6 +78,10 @@ const EditSaleConfirm = props => {
   let saleDate = format(new Date(selectedDate), "MM/dd/yyyy hh:mm a");
 
   //Picture area
+
+  const pictures = picturesToFormat.map(picture => picture.pic);
+
+
   //State and methods for picture stepper
   const [activeStep, setActiveStep] = useState(0);
 

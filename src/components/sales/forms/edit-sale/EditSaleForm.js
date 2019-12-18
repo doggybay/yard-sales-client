@@ -93,8 +93,6 @@ const EditSaleForm = (props) => {
     </GridListTile>
   ))
 
-  console.log(sale)
-
   return (
     <form
       className={classes.form}
@@ -108,7 +106,7 @@ const EditSaleForm = (props) => {
             required
             id="title"
             label="Sale Title"
-            defaultValue={sale.title}
+            defaultValue={title}
             fullWidth
             variant="outlined"
             className={classes.title}

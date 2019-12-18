@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from "react-redux";
 import { parseJSON } from 'date-fns'
 import { Link, useLocation } from 'react-router-dom'
 import { GridListTile, GridListTileBar, IconButton } from '@material-ui/core'
@@ -6,9 +7,11 @@ import InfoIcon from '@material-ui/icons/Info'
 import CloseIcon from '@material-ui/icons/Close'
 import EditIcon from '@material-ui/icons/Edit'
 
+import { fetchOneSale } from '../../../store/sales/actionCreators'
 
-const SaleTile = ({ sale, picture, getOneSale, classes, deleteOneSale, location }) => {
-  
+
+const SaleTile = ({ sale, picture, getOneSale, classes, deleteOneSale, location,  }) => {
+  const dispatch = useDispatch()
   let saleDate = sale.hasOwnProperty('id') ? new Intl.DateTimeFormat("en-us", {
     month: 'short',
     day: '2-digit',
@@ -20,7 +23,10 @@ const SaleTile = ({ sale, picture, getOneSale, classes, deleteOneSale, location 
 
   
 
-  
+  const editOneSale = (saleId, userId) => {
+    dispatch(fetchOneSale(saleId));
+    // dispatch(fetchOneUser(userId))
+  };
   
 
   return (
@@ -50,7 +56,7 @@ const SaleTile = ({ sale, picture, getOneSale, classes, deleteOneSale, location 
                 location.pathname === "/user-sales" ? classes.icon : classes.empty
               }
               to={`/edit-user-sale/${sale.id}`}
-              onClick={() => getOneSale(sale.id)}
+              onClick={() => editOneSale(sale.id)}
             >
               <EditIcon />
             </IconButton>

@@ -44,7 +44,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchAllSales())
-    dispatch(fetchOneUser(8))
+    dispatch(fetchOneUser(1))
   })
 
   return (

@@ -62,30 +62,34 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const EditSale = (props) => {
-  const sale = useSelector(state => state.sales.one) || props.sale;
+  const sale = useSelector(state => state.sales.one)
   const dispatch = useDispatch()
   const history = useHistory()
   // Component style classes
   const classes = useStyles()
   const theme = useTheme()
 
+  const saleLength = sale.hasOwnProperty('id') ? sale.location.length - 7 : 0
+  const saleAddress = sale.hasOwnProperty('id') ? sale.location.slice(0,saleLength) : ''
+  const saleZip = sale.hasOwnProperty('id') ? sale.location.slice(-5) : ''
   
-  //const saleAddress = sale.location.slice(-5)
-  console.log('address', sale)
+  
+  console.log("sale address", saleAddress)
+
 
   // State
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [clickedPicBtn, setClickedPicBtn] = useState(false)
-  const [title, setTitle] = useState('')
-  const [details, setDetails] = useState('')
-  const [pictures, setPictures] = useState([])
-  const [address, setAddress] = useState('')
-  const [zipCode, setZipCode] = useState('')
+  const [title, setTitle] = useState(sale.hasOwnProperty('id') ? sale.title : '')
+  const [details, setDetails] = useState(sale.hasOwnProperty('id') ? sale.details : '')
+  const [pictures, setPictures] = useState(sale.hasOwnProperty('id') ? sale.pictures : [])
+  const [address, setAddress] = useState(sale.hasOwnProperty('id') ? saleAddress : '')
+  const [zipCode, setZipCode] = useState(sale.hasOwnProperty('id') ? saleZip : '')
   const [step, setStep] = useState(1)
 
   // New sale object
   const newSale = {
-    user_id: 8,
+    user_id: 1,
     title: title,
     details: details,
     location: `${address}, ${zipCode}`,
@@ -142,6 +146,8 @@ const EditSale = (props) => {
     
     setPictures([...pictures])
   }
+
+  console.log("newSale: ", newSale)
 
   switch (step) {
     case 1:

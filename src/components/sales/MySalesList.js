@@ -5,6 +5,7 @@ import GridList from '@material-ui/core/GridList'
 import { useLocation } from 'react-router-dom'
 
 import { fetchOneSale, deleteSale } from '../../store/sales/actionCreators'
+import { fetchOneUser } from '../../store/users/actionCreators'
 
 import SaleTile from './sale/SaleTile'
 
@@ -49,6 +50,11 @@ const MySalesList = () => {
     dispatch(fetchOneSale(id))
   }
 
+  const editOneSale = (saleId, userId) => {
+    dispatch(fetchOneSale(saleId))
+    // dispatch(fetchOneUser(userId))
+  }
+  
   const deleteOneSale = (id) => {
     dispatch(deleteSale(id))
   }
@@ -59,7 +65,7 @@ const MySalesList = () => {
     const picture = sale ? sale.pictures[0].pic : ''
 
     return (
-      SaleTile({ sale, picture, classes, getOneSale, deleteOneSale, id, location })
+      SaleTile({ sale, picture, classes, getOneSale, deleteOneSale, id, location, editOneSale })
     )
   }) : {}
 
