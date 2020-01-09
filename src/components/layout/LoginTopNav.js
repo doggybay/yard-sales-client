@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const TopNav = () => {
+const LoginTopNav = () => {
   
   const classes = useStyles();
 
@@ -25,11 +25,10 @@ const TopNav = () => {
         <Typography color="inherit" variant="h6" className={classes.title}>
           Yard Sales
         </Typography>
-        <Button color="inherit" component={Link} to="/login">Login</Button>
         <Button color="inherit" component={Link} to="/">Home</Button>
       </Toolbar>
     </AppBar>
   );
 }
 
-export default TopNav
+export default LoginTopNav

@@ -6,12 +6,14 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import TopNav from './components/layout/TopNav'
 import UserTopNav from './components/layout/UserTopNav'
+import LoginTopNav from './components/layout/LoginTopNav'
 import UserSideNav from './components/layout/UserSideNav'
 import Sale from './components/sales/sale/Sale'
 import SalesList from './components/sales/SalesList'
 import AddSale from './components/sales/forms/sale/AddSale'
 import MySalesList from './components/sales/MySalesList'
 import EditSale from './components/sales/forms/edit-sale/EditSale'
+import Login from './components/Login'
 
 //Action creators
 import { fetchAllSales } from './store/sales/actionCreators'
@@ -50,8 +52,8 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* <TopNav /> */}
-        <UserTopNav />
+        {/* <LoginTopNav /> */}
+        <TopNav />
         <Grid container spacing={2}>
           <UserSideNav />
           {/* <Grid item sm={3}>
@@ -67,23 +69,16 @@ function App() {
           </Grid> */}
           <Grid item sm>
             <Switch>
-              <Route exact path='/' component={SalesList} />
-              <Route path='/sale/:id' component={Sale} />
-              <Route path='/add-sale' component={AddSale} />
-              <Route path='/user-sales' component={MySalesList} />
-              <Route path='/edit-user-sale/:id' component={EditSale} />
+              <Route exact path="/" component={SalesList} />
+              <Route path="/sale/:id" component={Sale} />
+              <Route path="/add-sale" component={AddSale} />
+              <Route path="/user-sales" component={MySalesList} />
+              <Route path="/edit-user-sale/:id" component={EditSale} />
+              <Route path="/login" component={Login} />
             </Switch>
           </Grid>
           <Grid item sm={3}>
-            <Paper className={classes.paper}>
-              <Typography variant="h5" component="h3">
-                Right sheet of paper.
-              </Typography>
-              <Typography component="p">
-                Paper can be used to build surface or other elements for your
-                application.
-              </Typography>
-            </Paper>
+            
           </Grid>
         </Grid>
       </div>
@@ -93,4 +88,6 @@ function App() {
 
 export default App
 
+https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/xbl/gamer/d0ggybay/profile/type/mp
 
+curl--location--request GET 'https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/battle/gamer/iShot%2321899/profile/type/mp'
