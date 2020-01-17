@@ -87,7 +87,3 @@ function App() {
 }
 
 export default App
-
-https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/xbl/gamer/d0ggybay/profile/type/mp
-
-curl--location--request GET 'https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/battle/gamer/iShot%2321899/profile/type/mp'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { TextField, Button, Paper, Grid, Container } from "@material-ui/core";
+import { TextField, Button, Paper, Grid, Container, Divider } from "@material-ui/core";
 
 
 const useStyles = makeStyles(theme => ({
@@ -9,42 +9,37 @@ const useStyles = makeStyles(theme => ({
       margin: theme.spacing(1),
       marginTop: 1
     },
+    padding: theme.spacing(3, 2),
+    marginTop: 10,
+    
   },
+  formPaper: {
+    backgroundColor: theme.palette.secondary.light,
+
+  },
+  formBtn: {
+    color: "white"
+  }
 }))
 
 const Login = () => {
   const classes = useStyles();
 
   return (
-    <Paper>
-      <Container>
+    <Paper className={classes.root}>
+      <form className={classes.root} noValidate autoComplete="off">
         <Grid container>
-          <Grid item sm={6}>
-            <Paper elevation={3}>
-              <form className={classes.root} noValidate autoComplete="off">
-                <TextField id="email" label="Enter Your Email" />
-                <TextField id="password" label="Enter Your Password" />
-
-                <Button color="secondary">Submit</Button>
-                <Button color="primary">Cancel</Button>
-              </form>
-            </Paper>
+          <Grid item sm={12}>
+            <TextField id="email" label="Enter Your Email" variant="outlined" />
+            <TextField id="password" label="Enter Your Password" variant="outlined" />
           </Grid>
-          <Grid item sm={6}>
-            <form className={classes.root} noValidate autoComplete="off">
-              <TextField id="email" label="Enter Your Email" />
-              <TextField id="password" label="Enter Your Password" />
-
-              <Grid item sm={6}>
-                <Button color="secondary">Submit</Button>
-              </Grid>
-              <Grid item sm={6}>
-                <Button color="primary">Cancel</Button>
-              </Grid>
-            </form>
+          <Grid item sm={12}>
+            <Button color="secondary" variant="contained">Submit</Button>
+            <Button color="secondary" variant="contained">Cancel</Button>
           </Grid>
         </Grid>
-      </Container>
+      </form>
+      
     </Paper>
   );
 }
